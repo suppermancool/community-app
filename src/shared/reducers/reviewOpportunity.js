@@ -4,7 +4,7 @@
 
 import _ from 'lodash';
 import { getAuthTokens } from 'utils/tc';
-import { reducers } from 'topcoder-react-lib';
+import { reducerFactory } from 'topcoder-react-lib';
 
 /**
  * Factory which creates a new reducer with its initial state tailored to the
@@ -22,7 +22,7 @@ export function factory(req) {
     _.set(options, 'reviewOpportunity.challenge.id', challengeId);
   }
 
-  return reducers.reviewOpportunity.factory(options);
+  return reducerFactory.reviewOpportunityReducer(options);
 }
 
 /* Default reducer with empty initial state. */

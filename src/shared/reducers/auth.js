@@ -1,11 +1,9 @@
 /**
  * Reducer for state.auth.
  */
-
-import communityActions from 'actions/tc-communities';
 import { getAuthTokens } from 'utils/tc';
 
-import { reducers } from 'topcoder-react-lib';
+import { reducerFactory } from 'topcoder-react-lib';
 
 /**
  * Factory which creates a new reducer with its initial state tailored to the
@@ -15,20 +13,9 @@ import { reducers } from 'topcoder-react-lib';
  * @return Promise which resolves to the new reducer.
  */
 export function factory(req) {
-  const options = {
+  return reducerFactory.authReducer({
     auth: getAuthTokens(req),
-    mergeReducers: {
-      [communityActions.tcCommunity.joinDone]: (state, { payload }) => ({
-        ...state,
-        profile: {
-          ...state.profile,
-          groups: state.profile.groups.concat({ id: payload.groupId.toString() }),
-        },
-      }),
-    },
-  };
-
-  return reducers.auth.factory(options);
+  });
 }
 
 /* Default reducer with empty initial state. */

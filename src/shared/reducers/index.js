@@ -16,7 +16,7 @@
 
 import { getCommunityId } from 'server/services/communities';
 import { redux } from 'topcoder-react-utils';
-import { reducers } from 'topcoder-react-lib';
+import { reducerFactory } from 'topcoder-react-lib';
 
 import cms from './cms';
 import topcoderHeader from './topcoder_header';
@@ -54,13 +54,13 @@ export function factory(req) {
   }, {
     ...resolvedReducers,
     cms,
-    groups: reducers.groups.default,
-    stats: reducers.stats.default,
-    direct: reducers.direct.default,
-    profile: reducers.profile.default,
-    errors: reducers.errors.default,
-    members: reducers.members.default,
-    memberTasks: reducers.memberTasks.default,
+    groups: reducerFactory.groupsDefault,
+    stats: reducerFactory.statsDefault,
+    direct: reducerFactory.directDefault,
+    profile: reducerFactory.profileDefault,
+    errors: reducerFactory.errorsDefault,
+    members: reducerFactory.membersDefault,
+    memberTasks: reducerFactory.memberTasksDefault,
     topcoderHeader,
     rss,
   }));

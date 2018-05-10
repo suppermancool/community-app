@@ -5,7 +5,7 @@
 import _ from 'lodash';
 import actions from 'actions/terms';
 import { getCommunityId } from 'server/services/communities';
-import { reducers } from 'topcoder-react-lib';
+import { reducerFactory } from 'topcoder-react-lib';
 import { getAuthTokens } from 'utils/tc';
 
 /**
@@ -33,36 +33,6 @@ function onOpenTermsModal(state, action) {
 }
 
 /**
- * Closes the specified terms modal, if necessary.
- * @param {Object} state
- * @param {Object} action
- * @return {Object} New state.
- */
-function onCloseTermsModal(state, { payload }) {
-  if (payload !== state.openTermsModalUuid
-  && state.openTermsModalUuid !== 'ANY') return state;
-  return { ...state, openTermsModalUuid: '' };
-}
-
-/**
- * Handles TERMS/SIGN_DOCU action.
- * @param {Object} state
- * @param {Object} action
- * @return {Object} New state.
- */
-function onSignDocu(state, action) {
-  const terms = _.cloneDeep(state.terms);
-  const term = _.find(terms, ['termsOfUseId', action.payload]);
-  term.agreed = true;
-  const selectedTerm = _.find(terms, t => !t.agreed);
-  return {
-    ...state,
-    terms,
-    selectedTerm,
-  };
-}
-
-/**
  * Factory which creates a new reducer with its initial state tailored to the
  * ExpressJS HTTP request, if specified (for server-side rendering). If HTTP
  * request is not specified, it creates just the default reducer.
@@ -71,25 +41,6 @@ function onSignDocu(state, action) {
  */
 export function factory(req) {
   const options = {};
-
-  options.initialState = {
-    getTermsFailure: false,
-    terms: [],
-    openTermsModalUuid: '',
-    selectedTerm: null,
-    viewOnly: false,
-    checkingStatus: false,
-    checkStatusError: false,
-    canRegister: false,
-  };
-
-  options.mergeReducers = {
-    [actions.terms.openTermsModal]: onOpenTermsModal,
-    [actions.terms.closeTermsModal]: onCloseTermsModal,
-
-    [actions.terms.selectTerm]: (state, { payload }) => ({ ...state, selectedTerm: payload }),
-    [actions.terms.signDocu]: onSignDocu,
-  };
 
   if (req) {
     let entity;
@@ -117,12 +68,12 @@ export function factory(req) {
       _.set(options, 'terms.entity.type', entity.type);
       _.set(options, 'terms.entity.id', entity.id);
 
-      return reducers.terms.factory(options).then((res) => {
+      return reducerFactory.termsReducer(options).then((res) => {
         // if we try to join community automatically, but not all terms are agreed,
         // then we show terms modal (also we make sure is logged in before open)
         if (options.auth.tokenV3 && req.query.join && !_.every(options.initialState.terms, 'agreed')) {
           const newState = onOpenTermsModal(options.initialState, actions.terms.openTermsModal('ANY'));
-          return reducers.terms.factory({
+          return reducerFactory.terms.factory({
             initialState: newState,
             mergeReducers: options.mergeReducers,
           });
@@ -132,7 +83,7 @@ export function factory(req) {
     }
   }
 
-  return reducers.terms.factory(options);
+  return reducerFactory.termsReducer(options);
 }
 
 /* Default reducer with empty initial state. */
