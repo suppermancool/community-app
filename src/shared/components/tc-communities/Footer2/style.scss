@@ -8,7 +8,8 @@
 
 .content {
   margin: auto;
-  max-width: 960px;
+  display: table;
+  width: 100%;
 }
 
 .copyright {
@@ -33,4 +34,5 @@
   @include font;
 
   float: right;
+  margin-right: 140px;
 }
