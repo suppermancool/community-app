@@ -8,8 +8,8 @@ const rnd = new Rnd();
 const mockUserObj = {
   rank: 1,
   avatarUrl: 'some.fake.string',
-  'challenge_stats.winner_handle': 'overachieving.mofo',
-  'challenge_stats.count': 99999,
+  handle: 'overachieving.mofo',
+  challengecount: 99999,
   'project_result.final_score': 9999999999,
 };
 const mockLeaderboardData = [mockUserObj, mockUserObj, mockUserObj, mockUserObj];

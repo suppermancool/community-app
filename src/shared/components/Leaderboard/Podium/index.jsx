@@ -70,9 +70,9 @@ export default function Podium(props) {
 
 const CompetitorShape = PT.shape({
   rank: PT.number.isRequired,
-  'challenge_stats.photo_url': PT.string,
-  'challenge_stats.winner_handle': PT.string.isRequired,
-  'challenge_stats.count': PT.number.isRequired,
+  avatar: PT.string,
+  handle: PT.string.isRequired,
+  challengecount: PT.number.isRequired,
   points: PT.number.isRequired,
 });
 

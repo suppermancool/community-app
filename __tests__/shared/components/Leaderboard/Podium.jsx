@@ -5,8 +5,8 @@ import Podium from 'components/Leaderboard/Podium';
 const mockUserObj = {
   rank: 1,
   photourl: 'some.fake.string',
-  'challenge_stats.winner_handle': 'overachieving.mofo',
-  'challenge_stats.count': 99999,
+  handle: 'overachieving.mofo',
+  challengecount: 99999,
   points: 9999999999,
 };
 

@@ -35,7 +35,7 @@ export default function LeaderboardTable(props) {
 
   const renderTableRows = comps => (
     comps.map((competitor) => {
-      let photoUrl = competitor['challenge_stats.photo_url'];
+      let photoUrl = competitor.avatar;
       if (photoUrl) {
         photoUrl = `${config.CDN.PUBLIC}/avatar/${
           encodeURIComponent(photoUrl)}?size=65`;
@@ -56,8 +56,8 @@ export default function LeaderboardTable(props) {
             </span>
           </td>
           <td styleName="styles.col-handle">
-            <a href={`${config.URL.BASE}/members/${competitor['challenge_stats.winner_handle']}/`}>
-              {competitor['challenge_stats.winner_handle']}
+            <a href={`${config.URL.BASE}/members/${competitor.handle}/`}>
+              {competitor.handle}
             </a>
             <div styleName="styles.winnings-info">
               <span>
@@ -66,10 +66,16 @@ export default function LeaderboardTable(props) {
 points
               </span>
               <span>
-                {competitor['challenge_stats.count']}
+                {competitor.challengecount}
                 {' '}
 challenges
               </span>
+              {competitor.fulfillment && (
+                <span>
+                  {competitor.fulfillment}
+                  {' '}
+                  fulfillment
+                </span>)}
             </div>
           </td>
           {isFulfillmentExist && (
@@ -77,7 +83,7 @@ challenges
               {competitor.fulfillment}
             </td>)}
           <td styleName="styles.col-challenges">
-            {competitor['challenge_stats.count']}
+            {competitor.challengecount}
           </td>
           <td styleName="styles.col-points">
             {competitor.points}
@@ -121,9 +127,9 @@ Points
 
 const CompetitorShape = PT.shape({
   rank: PT.number.isRequired,
-  'challenge_stats.photo_url': PT.string,
-  'challenge_stats.winner_handle': PT.string.isRequired,
-  'challenge_stats.count': PT.number.isRequired,
+  avatar: PT.string,
+  handle: PT.string.isRequired,
+  challengecount: PT.number.isRequired,
   points: PT.number.isRequired,
 });
 

@@ -22,7 +22,7 @@ function fetchLeaderboard(auth, apiUrl) {
     .then(res => res.json())
     .then((data) => {
       data.forEach(d => _.defaults(d, {
-        'challenge_stats.winner_handle': d.handle,
+        handle: d.handle,
         points: 0,
       }));
       data.sort((a, b) => b.points - a.points);

@@ -64,7 +64,7 @@ export default function PodiumSpot(props) {
     competitor,
   } = props;
 
-  let photoUrl = competitor['challenge_stats.photo_url'];
+  let photoUrl = competitor.avatar;
   if (photoUrl) {
     photoUrl = `${config.CDN.PUBLIC}/avatar/${
       encodeURIComponent(photoUrl)}?size=160`;
@@ -92,8 +92,8 @@ export default function PodiumSpot(props) {
         {displayRank}
       </div>
       <div>
-        <a styleName="styles.profile-link" href={`${config.URL.BASE}/members/${competitor['challenge_stats.winner_handle']}/`}>
-          {competitor['challenge_stats.winner_handle']}
+        <a styleName="styles.profile-link" href={`${config.URL.BASE}/members/${competitor.handle}/`}>
+          {competitor.handle}
         </a>
       </div>
       <div styleName="styles.winnings-info">
@@ -103,10 +103,16 @@ export default function PodiumSpot(props) {
 points
         </span>
         <span>
-          {competitor['challenge_stats.count']}
+          {competitor.challengecount}
           {' '}
 challenges
         </span>
+        {competitor.fulfillment && (
+          <span>
+            {competitor.fulfillment}
+            {' '}
+            fulfillment
+          </span>)}
       </div>
     </div>
   );
@@ -114,9 +120,9 @@ challenges
 
 const CompetitorShape = PT.shape({
   rank: PT.number.isRequired,
-  'challenge_stats.photo_url': PT.string,
-  'challenge_stats.winner_handle': PT.string.isRequired,
-  'challenge_stats.count': PT.number.isRequired,
+  avatar: PT.string,
+  handle: PT.string.isRequired,
+  challengecount: PT.number.isRequired,
   points: PT.number.isRequired,
 });
 
