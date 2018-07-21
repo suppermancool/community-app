@@ -128,7 +128,8 @@ $table-bg-hover: #f5f5f5;
   /* Table responsiveness */
   // Hide 'Challenges' and 'Points' columns on small screens
   .col-challenges,
-  .col-points {
+  .col-points,
+  .col-fulfillment {
     @include sm {
       display: none !important;
     }

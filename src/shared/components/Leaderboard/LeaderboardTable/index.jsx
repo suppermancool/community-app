@@ -30,6 +30,9 @@ export default function LeaderboardTable(props) {
   const {
     competitors,
   } = props;
+
+  const isFulfillmentExist = (competitors.length > 0 && competitors[0].fulfillment);
+
   const renderTableRows = comps => (
     comps.map((competitor) => {
       let photoUrl = competitor['challenge_stats.photo_url'];
@@ -69,6 +72,10 @@ challenges
               </span>
             </div>
           </td>
+          {isFulfillmentExist && (
+            <td styleName="styles.col-fulfillment">
+              {competitor.fulfillment}
+            </td>)}
           <td styleName="styles.col-challenges">
             {competitor['challenge_stats.count']}
           </td>
@@ -93,6 +100,10 @@ Rank
           <th styleName="styles.col-handle">
 Handle
           </th>
+          { isFulfillmentExist && (
+            <th styleName="styles.col-fulfillment">
+Fulfillment
+            </th>)}
           <th styleName="styles.col-challenges">
 # of Challenges
           </th>

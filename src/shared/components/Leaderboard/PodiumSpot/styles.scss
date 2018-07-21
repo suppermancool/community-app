@@ -39,7 +39,8 @@
 }
 
 .PodiumSpot--second,
-.PodiumSpot--third {
+.PodiumSpot--third,
+.PodiumSpot--more {
   margin-top: 32px;
 
   .leaderboard-avatar {
@@ -55,7 +56,8 @@
   }
 
   .PodiumSpot--second .leaderboard-avatar,
-  .PodiumSpot--third .leaderboard-avatar {
+  .PodiumSpot--third .leaderboard-avatar,
+  .PodiumSpot--more .leaderboard-avatar {
     height: 96px;
     width: 96px;
   }
@@ -68,7 +70,8 @@
   }
 
   .PodiumSpot--second .leaderboard-avatar,
-  .PodiumSpot--third .leaderboard-avatar {
+  .PodiumSpot--third .leaderboard-avatar,
+  .PodiumSpot--more .leaderboard-avatar {
     height: 128px;
     width: 128px;
   }

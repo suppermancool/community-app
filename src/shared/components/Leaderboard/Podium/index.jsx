@@ -32,6 +32,13 @@ export default function Podium(props) {
     competitors,
   } = props;
 
+  if (competitors.length > 1) {
+    const comp0 = competitors[0];
+    const comp1 = competitors[1];
+    competitors[0] = comp1;
+    competitors[1] = comp0;
+  }
+
   const renderPodium = (comps) => {
     if (comps.length === 0) {
       return (
@@ -39,17 +46,17 @@ export default function Podium(props) {
       );
     }
 
+    const renderItems = items => (
+      items.map(competitor => (
+        <div styleName="podium-column">
+          <PodiumSpot competitor={competitor} />
+        </div>
+      ))
+    );
+
     return (
       <div>
-        <div styleName="podium-column">
-          <PodiumSpot competitor={comps[1]} />
-        </div>
-        <div styleName="podium-column">
-          <PodiumSpot competitor={comps[0]} />
-        </div>
-        <div styleName="podium-column">
-          <PodiumSpot competitor={comps[2]} />
-        </div>
+        {renderItems(comps)}
       </div>
     );
   };

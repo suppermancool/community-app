@@ -36,6 +36,7 @@ const PODIUM_ITEM_MODIFIER = {
   1: 'first',
   2: 'second',
   3: 'third',
+  4: 'more',
 };
 
 /**
@@ -46,6 +47,7 @@ const CUSTOM_STYLES = {
   1: avatarStyles.gold,
   2: avatarStyles.silver,
   3: avatarStyles.bronze,
+  4: avatarStyles.default,
 };
 
 /**
@@ -68,18 +70,26 @@ export default function PodiumSpot(props) {
       encodeURIComponent(photoUrl)}?size=160`;
   }
 
+  let { rank } = competitor;
+  let displayRank = `${rank}th`;
+  if (rank > 3) {
+    rank = 4;
+  } else {
+    displayRank = DISPLAY_RANKING[competitor.rank];
+  }
+
   return (
-    <div styleName={`styles.PodiumSpot styles.PodiumSpot--${PODIUM_ITEM_MODIFIER[competitor.rank]}`}>
+    <div styleName={`styles.PodiumSpot styles.PodiumSpot--${PODIUM_ITEM_MODIFIER[rank]}`}>
       <span styleName="styles.leaderboard-avatar">
         <Avatar
           theme={{
-            avatar: CUSTOM_STYLES[competitor.rank],
+            avatar: CUSTOM_STYLES[rank],
           }}
           url={photoUrl}
         />
       </span>
       <div styleName="styles.ranking">
-        {DISPLAY_RANKING[competitor.rank]}
+        {displayRank}
       </div>
       <div>
         <a styleName="styles.profile-link" href={`${config.URL.BASE}/members/${competitor['challenge_stats.winner_handle']}/`}>
