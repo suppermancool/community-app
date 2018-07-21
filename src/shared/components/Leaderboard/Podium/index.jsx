@@ -48,7 +48,7 @@ export default function Podium(props) {
 
     const renderItems = items => (
       items.map(competitor => (
-        <div styleName="podium-column">
+        <div styleName={`podium-column ${(items.length === 1) ? 'full' : ''}`}>
           <PodiumSpot competitor={competitor} />
         </div>
       ))

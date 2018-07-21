@@ -19,6 +19,9 @@
 }
 
 .Podium .podium-column {
+  &.full {
+    width: 100%;
+  }
   width: 33.33333%;
   float: left;
   padding: 0 15px;
