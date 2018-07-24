@@ -575,6 +575,14 @@ exports[`Matches shallow shapshot 1`] = `
     <li>
       <Link
         replace={false}
+        to="/examples/tabs"
+      >
+        Tabs component
+      </Link>
+    </li>
+    <li>
+      <Link
+        replace={false}
         to="/examples/countdown"
       >
         Countdown

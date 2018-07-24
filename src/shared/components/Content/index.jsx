@@ -483,6 +483,9 @@ Misc Examples
       </h3>
       <ul>
         <li>
+          <Link to="/examples/tabs">Tabs component</Link>
+        </li>
+        <li>
           <Link to="/examples/countdown">Countdown</Link>
         </li>
         <li>
