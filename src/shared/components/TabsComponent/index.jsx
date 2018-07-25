@@ -6,8 +6,11 @@
 import PT from 'prop-types';
 import React from 'react';
 import {
-  Tab, Tabs, TabList, TabPanel,
+  Tabs, TabPanel,
 } from 'react-tabs';
+import CustomTabList from './CustomTabList';
+import CustomTab from './CustomTab';
+import CustomTabPanel from './CustomTabPanel';
 
 import './style.scss';
 
@@ -18,34 +21,25 @@ export default class TabsComponent extends React.Component {
     this.onSelect = this.onSelect.bind(this);
   }
 
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
   onSelect(index) {
     this.setState({ selectedIndex: index });
   }
 
   render() {
     const { tabs } = this.props;
-
     const { selectedIndex } = this.state;
+
     const tabsUI = tabs.map((info, index) => (
-      <Tab key={info.id} styleName={`tab ${(selectedIndex === index) ? 'selected' : ''}`}>{info.tab}<br /><span styleName="sub">{info.subTitle}</span></Tab>
+      <CustomTab key={info.id} isSelected={(selectedIndex === index)} tabInfo={info} />
     ));
 
     const tabPanelsUI = tabs.map(info => (
-      <TabPanel key={info.id} styleName="tab-pannel"> {info.content} </TabPanel>
+      <TabPanel key={info.id}><CustomTabPanel content={info.content} /></TabPanel>
     ));
 
     return (
       <Tabs styleName="container" onSelect={this.onSelect}>
-        <TabList styleName="tab-list">
-          {tabsUI}
-        </TabList>
-
+        <CustomTabList> {tabsUI} </CustomTabList>
         {tabPanelsUI}
       </Tabs>
     );

@@ -1,0 +1,22 @@
+@import "~styles/mixins";
+
+$container-background-gray: #ebebeb;
+
+.tab-list {
+  @include roboto-regular;
+
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  -webkit-flex-direction: row; /* Safari */
+  flex-direction: row;
+  -webkit-justify-content: center; /* Safari */
+  justify-content: center;
+  padding: 20px;
+  background: $container-background-gray;
+  list-style-type: none;
+
+  @include xs-to-sm {
+    -webkit-flex-direction: column; /* Safari */
+    flex-direction: column;
+  }
+}
