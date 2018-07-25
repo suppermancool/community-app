@@ -2,6 +2,7 @@
 
 $text-color-gray: #888894;
 $text-color-black: #262628;
+$text-color-pannel: #4a4a4a;
 $container-background-gray: #ebebeb;
 
 .container {
@@ -25,15 +26,16 @@ $container-background-gray: #ebebeb;
 
     .tab {
       text-align: center;
-      margin: 0 20px;
+      margin: 0 2px;
       color: $text-color-black;
       font-size: 20px;
       font-weight: 400;
       line-height: 25px;
       padding: 5px 15px;
+      cursor: pointer;
 
       @media only screen and (max-width: 767px) {
-        margin: 10px;
+        margin: 2px;
       }
 
       &:hover,
@@ -59,11 +61,12 @@ $container-background-gray: #ebebeb;
 
   .tab-pannel {
     text-align: center;
-    color: #4A4A4A;
+    color: $text-color-pannel;
     font-size: 36px;
     font-weight: 300;
     line-height: 45px;
-    width: 584px;
     padding: 20px;
+    position: absolute;
+    width: 100%;
   }
 }

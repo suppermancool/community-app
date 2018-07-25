@@ -33,11 +33,11 @@ export default class TabsComponent extends React.Component {
 
     const { selectedIndex } = this.state;
     const tabsUI = tabs.map((info, index) => (
-      <Tab styleName={`tab ${(selectedIndex === index) ? 'selected' : ''}`}>{info.tab}<br /><span styleName="sub">{info.subTitle}</span></Tab>
+      <Tab key={info.id} styleName={`tab ${(selectedIndex === index) ? 'selected' : ''}`}>{info.tab}<br /><span styleName="sub">{info.subTitle}</span></Tab>
     ));
 
     const tabPanelsUI = tabs.map(info => (
-      <TabPanel styleName="tab-pannel"> {info.content} </TabPanel>
+      <TabPanel key={info.id} styleName="tab-pannel"> {info.content} </TabPanel>
     ));
 
     return (
@@ -60,5 +60,6 @@ TabsComponent.propTypes = {
     tab: PT.string.isRequired,
     subTitle: PT.string.isRequired,
     content: PT.string.isRequired,
+    id: PT.number.isRequired,
   })).isRequired,
 };
